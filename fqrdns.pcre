@@ -700,6 +700,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.adslgp\.cegetel\.net$/	REJECT	Generic - Please relay via ISP (cegetel.net)
 /^public-gprs[1-9][0-9]{3,5}\.centertel\.pl$/		REJECT	Generic - Please relay via ISP (centertel.pl)
 /^public[1-9][0-9]{3,5}\.xdsl\.centertel\.pl$/		REJECT	Generic - Please relay via ISP (centertel.pl)
+/^public[0-9]{1,5}\.cdma\.centertel\.pl$/	REJECT	Dynamic - Please relay via ISP (centertel.pl)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.stat\.centurytel\.net$/	REJECT	Generic - Please relay via ISP (centurytel.net)
 /^d[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){2}\.home[0-9]?\.cgocable\.net$/	REJECT	Generic - Please relay via ISP (cgocable.net)
 /^[0-9]{12}\.chello\.fr$/		REJECT	Generic - Please relay via ISP (chello.fr)
