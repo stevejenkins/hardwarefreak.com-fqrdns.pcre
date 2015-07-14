@@ -463,6 +463,7 @@ if /^stat|business\.|corp|[\.-](sta(ic)?|ded)|[\.-]fixed/
 /^mx-ll-([12]?[0-9]{1,2}\.){2}[12]?[0-9]{1,2}-[12]?[0-9]{1,2}\.static\.tttmaxnet\.com$/	PREPEND X-GenericStaticHELO: (tttmaxnet.com)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.twtelecom\.net$/	PREPEND X-GenericStaticHELO: (twtelecom.net)
 /^static\.customer(-[12]?[0-9]{1,2}){4}\.uninet-ide\.com\.mx$/	PREPEND X-GenericStaticHELO: (uninet-ide.com.mx)
+/^customer(-[12]?[0-9]{1,2}){4}-sta\.uninet-ide\.com\.mx$/	PREPEND	X-GenericStaticHELO: (uninet-ide.com.mx)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){1,3}\.static\.vega-ua\.net$/	PREPEND X-GenericStaticHELO: (vega-ua.net)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.adsl\.sta\.[a-z]{2,12}\.velton\.ua$/	PREPEND X-GenericStaticHELO: (velton.ua)
 /^static(-[12]?[0-9]{1,2}){4}\.[a-z]{2,12}[0-9]{0,3}\.(dsl-w|east|fios)\.verizon\.net$/	PREPEND X-GenericStaticHELO: (verizon.net)
