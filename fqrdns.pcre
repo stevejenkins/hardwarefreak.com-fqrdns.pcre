@@ -1679,6 +1679,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^aclermont-ferrand(-[12]?[0-9]{1,2}){4}\.w81-251\.abo\.wanadoo\.fr$/	REJECT	Generic - Please relay via ISP (wanadoo.fr)
 /^adsl-dc-[0-9a-f]{4,6}\.adsl\.online\.nl$/	REJECT	Generic - Please relay via ISP (online.nl)
 /^pc(-[12]?[0-9]{1,2}){4}\.euro-net\.pl$/	REJECT	Generic - Please relay via ISP (euro-net.pl)
+/^ip(-[12]?[0-9]{1,2}){4}\.net\.upcbroadband\.cz$/	REJECT	Generic - Please relay via ISP (net.upcbroadband.cz)
 /^wana(-[12]?[0-9]{1,2}){4}\.wanamaroc\.com$/	REJECT	Generic - Please relay via ISP (wanaroc.com)
 /^([12]?[0-9]{1,2}\.){4}wbol\.warnerbros\.com$/	REJECT	Generic - Please relay via ISP (warnerbros.com)
 /^client(-[12]?[0-9]{1,2}){4}\.warrennet\.org$/	REJECT	Generic - Please relay via ISP (warrennet.org)
