@@ -1378,7 +1378,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}\.){4}gervasova-tl\.rmt\.ru$/	REJECT	Generic - Please relay via ISP (rmt.ru)
 /^([12]?[0-9]{1,2}\.){4}saturn-ht\.rmt\.ru$/	REJECT	Generic - Please relay via ISP (rmt.ru)
 /^clnt([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.pppoe\.rnl\.ru$/	REJECT	Generic - Please relay via ISP (rnl.ru)
-/^([12]?[0-9]{1,2}\.){4}robi\.com\.mk$/		REJECT	Generic - Please relay via ISP (robi.com.mk
+/^([12]?[0-9]{1,2}\.){4}robi\.com\.mk$/		REJECT	Generic - Please relay via ISP (robi.com.mk)
 /^([12]?[0-9]{1,2}\.){4}adsl-[a-z]{2,4}\.net\.rol\.ru$/	REJECT	Generic - Please relay via ISP (rol.ru)
 /^client-ip(-[12]?[0-9]{1,2}){4}\.romexnet\.ro$/	REJECT	Generic - Please relay via ISP (romexnet.ro)
 /^adsl[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.romtelecom\.net$/	REJECT	Generic - Please relay via ISP (romtelecom.net)
