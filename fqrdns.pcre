@@ -382,6 +382,7 @@ if /^stat|business\.|corp|[\.-](sta(ic)?|ded)|[\.-]fixed/
 /^stat(-[12]?[0-9]{1,2}){2}\.e-sky\.ru$/	PREPEND X-GenericStaticHELO: (e-sky.ru)
 /^host(-[12]?[0-9]{1,2}){4}\.sta\.embarqnow\.net$/	REJECT	Generic - Please relay via ISP (embarqnow.net)
 /^static(-[12]?[0-9]{1,2}){4}\.entelnet\.bo$/	PREPEND X-GenericStaticHELO: (entelnet.bo)
+/^static-adsl([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.une\.net\.co$/	PREPEND	X-GenericStaticHELO: (une.net.co)
 /^static-adsl([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.epm\.net\.co$/	PREPEND X-GenericStaticHELO: (epm.net.co)
 /^static-epm[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.epm\.net\.co$/	PREPEND X-GenericStaticHELO: (epm.net.co)
 /^static-static-adsl[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.epm\.net\.co$/	PREPEND X-GenericStaticHELO: (epm.net.co)
