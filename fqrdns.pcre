@@ -53,8 +53,9 @@
 /^([0-9]{1,3}\.){3}[0-9]{1,3}$/         DUNNO
 
 #+++++ dynamic.regexp +++++
-if /[0-9]{4}|[0-9]+[^0-9]+[0-9]+|dhcp|dynamic|pppoe/
-if /^doc|cable|dhcp|dial|din|dsl|dyn|pool|ppp/
+if /[0-9]{4}|[0-9]+[^0-9]+[0-9]+|dhcp|dynamic|pppoe|wireless/
+if /^doc|cable|dhcp|dial|din|dsl|dyn|pool|ppp|wireless/
+/^out-[a-z]{2}-[12]?[0-9]{1,2}\.wireless\.telus\.com$/	REJECT	Dynamic - Please relay via ISP (telus.com)
 /^host[0-9]{1,3}-[0-9]{1,3}-dynamic\.[0-9]{1,3}-[0-9]{1,2}-r\.retail\.telecomitalia\.it$/	REJECT  Dynamic - Please relay via ISP (telecomitalia.it)
 /^adsl\.viettel\.vn$/					REJECT  Dynamic - Please relay via ISP (vietel.com.vn)
 /^([0-9]{1,3}-){3}[0-9]{1,3}\.pool\.nctc\.com$/		REJECT  Dynamic - Please relay via ISP (nctc.com)
