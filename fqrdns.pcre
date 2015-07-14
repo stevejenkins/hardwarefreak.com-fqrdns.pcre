@@ -1680,6 +1680,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^adsl-dc-[0-9a-f]{4,6}\.adsl\.online\.nl$/	REJECT	Generic - Please relay via ISP (online.nl)
 /^pc(-[12]?[0-9]{1,2}){4}\.euro-net\.pl$/	REJECT	Generic - Please relay via ISP (euro-net.pl)
 /^ip(-[12]?[0-9]{1,2}){4}\.net\.upcbroadband\.cz$/	REJECT	Generic - Please relay via ISP (net.upcbroadband.cz)
+/^[012]?[0-9]{2}(-[012]?[0-9]{1,2}){3,4}\.baf\.movistar\.cl$/	REJECT	Generic - Please relay via ISP (movistar.cl)
 /^wana(-[12]?[0-9]{1,2}){4}\.wanamaroc\.com$/	REJECT	Generic - Please relay via ISP (wanaroc.com)
 /^([12]?[0-9]{1,2}\.){4}wbol\.warnerbros\.com$/	REJECT	Generic - Please relay via ISP (warnerbros.com)
 /^client(-[12]?[0-9]{1,2}){4}\.warrennet\.org$/	REJECT	Generic - Please relay via ISP (warrennet.org)
