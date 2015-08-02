@@ -489,7 +489,6 @@ endif
 /^adsl(-[12]?[0-9]{1,2}){4}\.eunet\.rs$/	REJECT	Generic - Please relay via ISP (eunet.rs)
 /^adsl(-[12]?[0-9]{1,2}){4}\.monradsl\.monornet\.hu$/	REJECT	Generic - Please relay via ISP (monornet.hu)
 /^mobile(-[0-9]{3}){4}\.mycingular\.net$/	REJECT	Generic - Please relay via ISP (mycingular.net)
-/^broadband(-[12]?[0-9]{1,2}){4}\.nationalcablenetworks\.ru$/	REJECT	Generic - Please relay via ISP (nationalcablenetworks.ru)
 /^as42959(-[12]?[0-9]{1,2}){4}\.mol\.net\.ua$/	REJECT	Generic - Please relay via ISP (mol.net.ua)
 /^host(-[12]?[0-9]{1,2}){4}\.nettelecom\.ro$/	REJECT	Generic - Please relay via ISP (nettelecom.ro)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.serverpronto\.com$/	REJECT	Generic - Please relay via ISP (serverpronto.com)
