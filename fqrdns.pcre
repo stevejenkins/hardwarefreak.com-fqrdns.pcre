@@ -1,6 +1,6 @@
 # Postfix PCRE bot spam killer
 # 
-# Updated 8/2/2015
+# Updated 11/11/2015
 #
 # The following set of regular expressions attempt to stop bot spam connections
 # by matching the FQrDNS name of the sending IP against known consumerish rDNS
