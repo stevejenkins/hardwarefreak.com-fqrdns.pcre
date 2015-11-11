@@ -506,7 +506,6 @@ endif
 /\.hananet$/			REJECT	Generic - Please relay via ISP (hananet)
 /\.home$/			REJECT	Generic - Please relay via ISP
 /\.invalid$/			REJECT	Generic - Please relay via ISP
-/\.in-addr\.arpa$/		REJECT	Generic - Please relay via ISP
 /\.kornet$/			REJECT	Generic - Please relay via ISP (kornet)
 /\.lan$/			REJECT	Generic - Please relay via ISP
 /\.localdomain$/		REJECT	Generic - Please relay via ISP
