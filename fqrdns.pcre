@@ -1,6 +1,6 @@
 # Postfix PCRE bot spam killer
 # 
-# Updated 8/2/2015
+# Updated 15 Nov 2015
 #
 # The following set of regular expressions attempt to stop bot spam connections
 # by matching the FQrDNS name of the sending IP against known consumerish rDNS
@@ -680,6 +680,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^c(mu)?-?[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.[a-z]{3,6}[0-9]?\.cablespeed\.com$/	REJECT	Generic - Please relay via ISP (cablespeed.com)
 /^customer(-[12]?[0-9]{1,2}){4}\.cablevision\.net\.mx$/	REJECT	Generic - Please relay via ISP (cablevision.net.mx)
 /^([12]?[0-9]{1,2}\.){4}[a-z]{3,8}\.cableworld\.es$/	REJECT	Generic - Please relay via ISP (cableworld.es)
+/^([12]?[0-9]{1,2}\.){4}dynamic\.cablesurf\.de$/	REJECT	Dynamic - Please relay via ISP (cablesurf.de)
 /^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.cabonnet\.com\.br$/	REJECT	Generic - Please relay via ISP (cabonnet.com.br)
 /^cab-([12]?[0-9]{1,2}){2}\.calixo\.net$/		REJECT	Generic - Please relay via ISP (calixo.net)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.callplus\.net\.nz$/	REJECT	Generic - Please relay via ISP (callplus.net.nz)
