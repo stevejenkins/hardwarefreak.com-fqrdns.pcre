@@ -11,16 +11,16 @@
 
 The following set of regular expressions attempt to stop bot spam connections
 by matching the FQrDNS name of the sending IP against known consumerish rDNS
-patterns or other rDNS patterns likely to be sources of bot spam and not legit  
+patterns or other rDNS patterns likely to be sources of bot spam and not legit
 email.  This methodology is not without error, but time has proven it to be very
-accurate.  If it blocks a sender you know to be legit and from whom you need to 
+accurate.  If it blocks a sender you know to be legit and from whom you need to
 receive mail I recommend whitelisting that source instead of removing an expression
 below as a means to solve the problem.  The expressions are POSIX regular
 expressions and can be used with either the PCRE or REGEXP table type.  The PCRE
-engine is typically faster. 
+engine is typically faster.
 
 This file is provided AS IS with no WARRANTY.  It is free software, without attribute
-or copyright, and without license.  As such, you are completely free to use it 
+or copyright, and without license.  As such, you are completely free to use it
 and modify it as you see fit, for your purposes, with absolutely no strings attached.
 
 Usage:
