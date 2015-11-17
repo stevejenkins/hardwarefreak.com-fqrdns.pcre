@@ -5,9 +5,10 @@
 # This "plus" file is an addendum to the fqrdns.pcre file found at:
 # https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre
 # 
-# The intent of this plus file is to provide more "restrictive" rules that may have been
-# removed from the original fqrdns.pcre file because of their potential to cause false positives.
-# It should be used in addition to (and not in the place of) the original fqrdns.pcre file.
+# The intent of this "plus" file is to provide more restrictive rules that may have been
+# moved here from the original fqrdns.pcre file because of their potential to cause false
+# positives and/or block legitimate mail. It should be used in addition to (and not in lieu
+# of) the original fqrdns.pcre file.
 # 
 # This file is provided AS IS with no WARRANTY. It is free software, without attribute
 # or copyright, and without license. As such, you are completely free to use it 
