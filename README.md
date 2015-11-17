@@ -10,7 +10,7 @@
 There are now <strong>three</strong> PCRE files in the fqrdns.pcre project. They are:
 
 <ol>
-<li><strong>fqrdns.prec</strong> - the primary list of bot spam killer rules</li>
+<li><strong>fqrdns.pcre</strong> - the primary list of bot spam killer rules</li>
 <li><strong>fqrdns-plus.pcre</strong> - rules that have been moved from the original fqrdns.pcre file due to an increased likelihood of false positives</li>
 <li><strong>fqrdns-max.pcre</strong> - new rules that were never part of the original fqrdns.pcre file and which use more general patterns to take more a aggressive approach to blocking bot spam, including a maximum number of dynamic hosts and/or misconfigured senders. These patterns help enforce a more strict and "forensically sound" route of static addresses from sender to recipient, at an increased risk of blocking potentially legitimate mail.</li>
 </ol>
