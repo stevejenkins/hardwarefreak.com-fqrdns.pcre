@@ -1,19 +1,23 @@
-# Postfix PCRE bot spam killer
+# Postfix PCRE Bot Spam Killer
 # 
-# Updated 15 Nov 2015
+# Updated 16 Nov 2015
 #
 # The following set of regular expressions attempt to stop bot spam connections
 # by matching the FQrDNS name of the sending IP against known consumerish rDNS
 # patterns or other rDNS patterns likely to be sources of bot spam and not legit  
-# email.  This methodology is not without error, but time has proven it to be very
-# accurate.  If it blocks a sender you know to be legit and from whom you need to 
+# email. This methodology is not without error, but time has proven it to be very
+# accurate. If it blocks a sender you know to be legit and from whom you need to 
 # receive mail I recommend whitelisting that source instead of removing an expression
-# below as a means to solve the problem.  The expressions are POSIX regular
-# expressions and can be used with either the PCRE or REGEXP table type.  The PCRE
-# engine is typically faster. 
+# below as a means to solve the problem. The expressions are POSIX regular
+# expressions and can be used with either the PCRE or REGEXP table type. The PCRE
+# engine is typically faster.
+#
+# If you would like to include additional regular expressions that might block more
+# bot spam connections at the risk of potentially more false positives, you should
+# also consider using the fqrdns-plus.pcre file.
 # 
-# This file is provided AS IS with no WARRANTY.  It is free software, without attribute
-# or copyright, and without license.  As such, you are completely free to use it 
+# This file is provided AS IS with no WARRANTY. It is free software, without attribute
+# or copyright, and without license. As such, you are completely free to use it 
 # and modify it as you see fit, for your purposes, with absolutely no strings attached.
 # 
 # Usage:
@@ -24,12 +28,12 @@
 # smtpd_client_restrictions =
 #	...
 #	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-# 	...
+# ...
 #
 # or
 #	check_client_access pcre:/etc/postfix/fqrdns.pcre
 #
-# Use the first above with Postfix 2.6 or later, the second with 2.5 and ealier.  If you
+# Use the first above with Postfix 2.6 or later, the second with 2.5 and ealier. If you
 # use the "everything under smtp_recipient_restrictions" style of main.cf add this
 # toward the very top of your restrictions list, with your IP whitelist first, such as:
 #
@@ -41,8 +45,9 @@
 #	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
 #	...
 #
-# If you add a pattern which isn't currently covered please email it to stan at hardwarefreak.com
-# so I can add it to the "master" file located at http://www.hardwarefreak.com/fqrdns.pcre
+# If you would like to propose a pattern which isn't currently covered please create a
+# new issue on the project's GitHub page (https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre)
+# so it can be considered for inclusion.
 #
 # The file doesn't change very often so a wget every two weeks is usually sufficient.
 # Each file change is normally one or more new expressions or minor fixes.
@@ -342,6 +347,7 @@ if /^doc|cable|dhcp|dial|din|dsl|dyn|pool|ppp|wireless/
 /^(\d{1,3}-){4}adsl-dyn\.4u\.com\.gh$/	REJECT  Dynamic - Please relay via ISP (4u.com.gh)
 endif
 endif
+
 #+++++ static.regexp +++++
 if /^stat|business\.|corp|[\.-](sta(ic)?|ded)|[\.-]fixed/
 /^([12]?[0-9]{1,2}\.){4}static\.012\.net\.il$/	PREPEND X-GenericStaticHELO: (012.net.il)
@@ -495,6 +501,7 @@ endif
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.spectrumnet\.bg$/	REJECT	Generic - Please relay via ISP (spectrumnet.bg)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.stream\.uz$/	REJECT	Generic - Please relay via ISP (stream.uz)
 /^ip(-[12]?[0-9]{1,2}){4}\.unitymediagroup\.de$/	REJECT	Generic - Please relay via ISP (unitymediagroup.de)
+
 #+++++ generic.regexp +++++
 /\.actdsltmp$/			REJECT	Generic - Please relay via ISP
 /\.adsl$/			REJECT	Generic - Please relay via ISP
@@ -506,7 +513,6 @@ endif
 /\.hananet$/			REJECT	Generic - Please relay via ISP (hananet)
 /\.home$/			REJECT	Generic - Please relay via ISP
 /\.invalid$/			REJECT	Generic - Please relay via ISP
-/\.in-addr\.arpa$/		REJECT	Generic - Please relay via ISP
 /\.kornet$/			REJECT	Generic - Please relay via ISP (kornet)
 /\.lan$/			REJECT	Generic - Please relay via ISP
 /\.localdomain$/		REJECT	Generic - Please relay via ISP
@@ -770,7 +776,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^adsl(-[12]?[0-9]{1,2}){4}\.cotel\.com\.ar$/	REJECT	Generic - Please relay via ISP (cotel.com.ar)
 /^h(-[12]?[0-9]{1,2}){4}\.[a-z]{3,10}[0-9]{0,3}\.covad\.net$/	REJECT	Generic - Please relay via ISP (covad.net)
 /^h(-[12]?[0-9]{1,2}){4}\.[a-z]{4,10}[0-9]{0,2}\.covad\.net$/	REJECT	Generic - Please relay via ISP (covad.net)
-/^wsip(-[12]?[0-9]{1,2}){4}\.([a-z]{2}\.){2}cox\.net$/	REJECT	Generic - Please relay via ISP (cox.net)
+
 /^ip-([12]?[0-9]{1,2}\.){4}crowley\.pl$/	REJECT	Generic - Please relay via ISP (crowley.pl)
 /^dsl(-[12]?[0-9]{1,2}){4}\.cruzio\.com$/	REJECT	Generic - Please relay via ISP (cruzio.com)
 /^ip-([12]?[0-9]{1,2}\.){4}csa-net\.pl$/	REJECT	Generic - Please relay via ISP (csa-net.pl)
@@ -1386,7 +1392,6 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.[a-z]{3,16}\.res\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^([12]?[0-9]{1,2}\.){4}[a-z]{3,16}\.res\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^cpe(-[12]?[0-9]{1,2}){4}\.[a-z]{2,6}\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
-/^rrcs(-[12]?[0-9]{1,2}){4}\.[a-z]{2,10}\.biz\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^([12]?[0-9]{1,2}-[12]?[0-9]{1,2}\.){2}tampabay\.res\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^ip(-[12]?[0-9]{1,2}){4}\.user\.rsspnet\.ru$/	REJECT	Generic - Please relay via ISP (rsspnet.ru)
 /^([12]?[0-9]{1,2}\.){4}rtc\.coop$/	REJECT	Generic - Please relay via ISP (rtc.coop)
@@ -1600,7 +1605,6 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.del\.tulipconnect\.com$/	REJECT	Generic - Please relay via ISP (tulipconnect.com)
 /^user(-[12]?[0-9]{1,2}){4}\.tvcablenet\.be$/	REJECT	Generic - Please relay via ISP (tvcablenet.be)
 /^cpe[0-9]{2,6}\.tvcom\.net\.ua$/	REJECT	Generic - Please relay via ISP (tvcom.net.ua)
-
 /^host([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.tvkdiana\.pl$/	REJECT	Generic - Please relay via ISP (tvkdiana.pl)
 /^dsl([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.pool\.tvnet\.hu$/	REJECT	Generic - Please relay via ISP (tvnet.hu)
 /^IP(-[12]?[0-9]{1,2}){2}\.tvnetwork\.hu$/	REJECT	Generic - Please relay via ISP (tvnetwork.hu)
