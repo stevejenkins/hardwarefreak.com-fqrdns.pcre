@@ -1,8 +1,8 @@
 # Postfix PCRE PLUS
 # 
-# Updated 16 Nov 2015
+# Updated 18 Nov 2015
 #
-# This "plus" file is an addendum to the fqrdns.pcre file found at:
+# This "plus" file is an addendum to the fqrdns.pcre file found at
 # https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre
 # 
 # The intent of this "plus" file is to provide more restrictive rules that may have been
@@ -14,41 +14,7 @@
 # or copyright, and without license. As such, you are completely free to use it 
 # and modify it as you see fit, for your purposes, with absolutely no strings attached.
 # 
-# Usage:
-#
-# Save this file as /etc/postfix/fqrdns-plus.pcre
-# Add to main.cf
-#
-# smtpd_client_restrictions =
-#	...
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-plus.pcre
-# ...
-#
-# or
-#	check_client_access pcre:/etc/postfix/fqrdns.pcre
-#	check_client_access pcre:/etc/postfix/fqrdns-plus.pcre
-#
-# Use the first above with Postfix 2.6 or later, the second with 2.5 and ealier. If you
-# use the "everything under smtp_recipient_restrictions" style of main.cf add this
-# toward the very top of your restrictions list, with your IP whitelist first, such as:
-#
-# smtpd_recipient_restrictions =
-#	permit_mynetworks
-#	permit_sasl_authenticated
-#	reject_unauth_destination
-#	check_client_access hash:/etc/postfix/whitelist
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-plus.pcre
-#	...
-#
-# If you would like to propose a pattern which isn't currently covered please create a
-# new issue on the project's GitHub page (https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre)
-# so it can be considered for inclusion.
-#
-# The file doesn't change very often so a wget every two weeks is usually sufficient.
-# Each file change is normally one or more new expressions or minor fixes.
-#
+# See https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre for usage.
 
 #+++++ static.regexp +++++
 if /^stat|business\.|corp|[\.-](sta(ic)?|ded)|[\.-]fixed/
