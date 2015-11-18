@@ -1,7 +1,7 @@
 <h1>Postfix PCRE Bot Spam Killer</h2>
 *(no longer available at www.hardwarefreak.com/fqrdns.pcre)*
 
-<strong><em>v2015-11-16</em></strong>
+<strong><em>v2015-11-18</em></strong>
 
 <em>This file was originally created and maintained by Stan Hoeppner, and is maintained "by proxy" by Steve Jenkins until Stan is ready to take it over again.</em>
 
