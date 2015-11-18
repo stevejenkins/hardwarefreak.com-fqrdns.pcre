@@ -1,8 +1,8 @@
 # Postfix PCRE MAX
 # 
-# Updated 16 Nov 2015
+# Updated 18 Nov 2015
 #
-# This "max" file is an addendum to the fqrdns.pcre and fqrdns-plus.pcre files found at:
+# This "max" file is an addendum to the fqrdns.pcre and fqrdns-plus.pcre files found at
 # https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre
 # 
 # The intent of this "max" file is to provide new rules that were never part of the original
@@ -16,51 +16,11 @@
 # or copyright, and without license. As such, you are completely free to use it 
 # and modify it as you see fit, for your purposes, with absolutely no strings attached.
 # 
-# Usage:
-#
-# Save this file as /etc/postfix/fqrdns-max.pcre
-# Add to main.cf
-#
-# smtpd_client_restrictions =
-#	...
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-plus.pcre
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-max.pcre
-# ...
-#
-# or
-#	check_client_access pcre:/etc/postfix/fqrdns.pcre
-#	check_client_access pcre:/etc/postfix/fqrdns-plus.pcre
-#	check_client_access pcre:/etc/postfix/fqrdns-max.pcre
-#
-# Use the first above with Postfix 2.6 or later, the second with 2.5 and ealier. If you
-# use the "everything under smtp_recipient_restrictions" style of main.cf add this
-# toward the very top of your restrictions list, with your IP whitelist first, such as:
-#
-# smtpd_recipient_restrictions =
-#	permit_mynetworks
-#	permit_sasl_authenticated
-#	reject_unauth_destination
-#	check_client_access hash:/etc/postfix/whitelist
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-plus.pcre
-#	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-max.pcre
-#	...
-#
-# If you would like to propose a pattern which isn't currently covered please create a
-# new issue on the project's GitHub page (https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre)
-# so it can be considered for inclusion.
-#
-# The file doesn't change very often so a wget every two weeks is usually sufficient.
-# Each file change is normally one or more new expressions or minor fixes.
-#
+# See https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre for usage.
 
 #+++++ dynamic.regexp +++++
-if /[0-9]{4}|[0-9]+[^0-9]+[0-9]+|dhcp|dynamic|pppoe|wireless|wifi|wimax/
-if /^doc|cable|dhcp|dial|din|dsl|dyn|pool|ppp|wireless|wifi|wimax/
-/dyn(amic|adsl|dsl|ip)?[0-9]?[.-]/      REJECT Dynamic - Please relay via your ISP
+/([0-9]{1,3}[.-]){2,4}.[.-]d[iy]namic[ao]/ REJECT Dynamic - Please relay via your ISP
+/d[iy]n(amic|amicIP|adsl|dsl|ip|pool)?[.-_]?.[0-9]{0,3}[.-]/ REJECT Dynamic - Please relay via your ISP
 /dial(in|up|-up|ip|pool|bs)?[0-9]?[.-]/ REJECT Dynamic - Please relay via your ISP
-/dhcp[0-9]?[.-]/                        REJECT Dynamic - Please relay via your ISP
-/(wireless|wifi|wimax)[.-]/             REJECT Dynamic - Please relay via your ISP
-endif
-endif
+/dhcp[0-9]?[.-]/ REJECT Dynamic - Please relay via your ISP
+/(wireless|wifi|wimax|.mobileonline)[.-]/ REJECT Dynamic - Please relay via your ISP
