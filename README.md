@@ -59,7 +59,7 @@ toward the very top of your restrictions list, with your IP whitelist first, suc
     	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
     	...
 
-If you ~~add~~ like to propose a pattern which isn't currently covered please ~~email it to stan at hardwarefreak.com~~ create a new issue or pull request here so ~~I can add it to the "master" file located at http://www.hardwarefreak.com/fqrdns.pcre~~ it can be considered for inclusion.
+If you ~~add~~ would like to propose a pattern which isn't currently covered please ~~email it to stan at hardwarefreak.com~~ create a new issue or pull request here on Github so ~~I can add it to the "master" file located at http://www.hardwarefreak.com/fqrdns.pcre~~ it can be considered for inclusion.
 
 The file doesn't change very often so a wget every two weeks is usually sufficient.
 Each file change is normally one or more new expressions or minor fixes.
