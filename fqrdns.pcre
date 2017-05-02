@@ -1,19 +1,23 @@
-# Postfix PCRE bot spam killer
+# Postfix PCRE Bot Spam Killer
 # 
-# Updated 15 Nov 2015
+# Updated 16 Nov 2015
 #
 # The following set of regular expressions attempt to stop bot spam connections
 # by matching the FQrDNS name of the sending IP against known consumerish rDNS
 # patterns or other rDNS patterns likely to be sources of bot spam and not legit  
-# email.  This methodology is not without error, but time has proven it to be very
-# accurate.  If it blocks a sender you know to be legit and from whom you need to 
+# email. This methodology is not without error, but time has proven it to be very
+# accurate. If it blocks a sender you know to be legit and from whom you need to 
 # receive mail I recommend whitelisting that source instead of removing an expression
-# below as a means to solve the problem.  The expressions are POSIX regular
-# expressions and can be used with either the PCRE or REGEXP table type.  The PCRE
-# engine is typically faster. 
+# below as a means to solve the problem. The expressions are POSIX regular
+# expressions and can be used with either the PCRE or REGEXP table type. The PCRE
+# engine is typically faster.
+#
+# If you would like to include additional regular expressions that might block more
+# bot spam connections at the risk of potentially more false positives, you should
+# also consider using the fqrdns-plus.pcre file.
 # 
-# This file is provided AS IS with no WARRANTY.  It is free software, without attribute
-# or copyright, and without license.  As such, you are completely free to use it 
+# This file is provided AS IS with no WARRANTY. It is free software, without attribute
+# or copyright, and without license. As such, you are completely free to use it 
 # and modify it as you see fit, for your purposes, with absolutely no strings attached.
 # 
 # Usage:
@@ -24,12 +28,12 @@
 # smtpd_client_restrictions =
 #	...
 #	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-# 	...
+# ...
 #
 # or
 #	check_client_access pcre:/etc/postfix/fqrdns.pcre
 #
-# Use the first above with Postfix 2.6 or later, the second with 2.5 and ealier.  If you
+# Use the first above with Postfix 2.6 or later, the second with 2.5 and ealier. If you
 # use the "everything under smtp_recipient_restrictions" style of main.cf add this
 # toward the very top of your restrictions list, with your IP whitelist first, such as:
 #
@@ -41,8 +45,9 @@
 #	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
 #	...
 #
-# If you add a pattern which isn't currently covered please email it to stan at hardwarefreak.com
-# so I can add it to the "master" file located at http://www.hardwarefreak.com/fqrdns.pcre
+# If you would like to propose a pattern which isn't currently covered please create a
+# new issue on the project's GitHub page (https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre)
+# so it can be considered for inclusion.
 #
 # The file doesn't change very often so a wget every two weeks is usually sufficient.
 # Each file change is normally one or more new expressions or minor fixes.
@@ -342,144 +347,7 @@ if /^doc|cable|dhcp|dial|din|dsl|dyn|pool|ppp|wireless/
 /^(\d{1,3}-){4}adsl-dyn\.4u\.com\.gh$/	REJECT  Dynamic - Please relay via ISP (4u.com.gh)
 endif
 endif
-#+++++ static.regexp +++++
-if /^stat|business\.|corp|[\.-](sta(ic)?|ded)|[\.-]fixed/
-/^([12]?[0-9]{1,2}\.){4}static\.012\.net\.il$/	PREPEND X-GenericStaticHELO: (012.net.il)
-/^([12]?[0-9]{1,2}\.){4}sta\.211\.ru$/	PREPEND X-GenericStaticHELO: (211.ru)
-/^static[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.regina\.accesscomm\.ca$/	PREPEND X-GenericStaticHELO: (accesscomm.ca)
-/^static(-[12]?[0-9]{1,2}){4}\.acelerate\.net$/	PREPEND X-GenericStaticHELO: (acelerate.net)
-/^(abts|dsl)-[a-z]{2,3}-static-([0-2]?[0-9]{1,2}\.){4}airtelbroadband\.in$/	PREPEND X-GenericStaticHELO: (airtelbroadband.in)
-/^([12]?[0-9]{1,2}\.){4}static-user\.(ajato\.com\.br)$/	PREPEND X-GenericStaticHELO: (ajato.com.br)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static-corp\.ajato\.com\.br$/	PREPEND X-GenericStaticHELO: (ajato.com.br)
-/^([12]?[0-9]{1,2}-){4}static\.albacom\.net$/	PREPEND X-GenericStaticHELO: (albacom.net)
-/^[12]?[0-9]{1,2}-[12]?[0-9]{1,2}\.static\.alkar\.net$/	PREPEND X-GenericStaticHELO: (alkar.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.ded\.ameritech\.net$/	PREPEND X-GenericStaticHELO: (ameritech.net)
-/^cpe(-[12]?[0-9]{1,2}){4}\.static\.amis\.net$/	PREPEND X-GenericStaticHELO: (amis.net)
-/^dialbs(-[0-2][0-9]{2}){4}\.static\.arcor-ip\.net$/	PREPEND X-GenericStaticHELO: (arcor-ip.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.asianet\.co\.th$/	PREPEND X-GenericStaticHELO: (asianet.co.th)
-/^[12]?[0-9]{1,2}\.[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){2}\.adsl-static\.isp\.belgacom\.be$/	PREPEND X-GenericStaticHELO: (belgacom.be)
-/^bzq(-[12]?[0-9]{1,2}){3}\.static\.bezeqint\.net$/	PREPEND X-GenericStaticHELO: (bezeqint.net)
-/^cpe(-[12]?[0-9]{1,2}){4}\.static\.[a-z]{2,4}\.bigpond\.net\.au$/	PREPEND X-GenericStaticHELO: (bigpond.net.au)
-/^cpe(-[12]?[0-9]{1,2}){4}\.static\.qld\.bigpond\.net\.au$/	PREPEND X-GenericStaticHELO: (bigpond.net.au)
-/^static(-[12]?[0-9]{1,2}){4}\.isp\.broadviewnet\.net$/	PREPEND X-GenericStaticHELO: (broadviewnet.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.cablecom\.ch$/	PREPEND	X-GenericStaticHELO: (cablecom.ch)
-/^static-ip-cr[0-9]{4,12}\.cable\.net\.co$/	PREPEND X-GenericStaticHELO: (cable.net.co)
-/^static(-[12]?[0-9]{1,2}){4}\.caucasus\.net$/		PREPEND	X-GenericStaticHELO: (caucasus.net)
-/^static(-[12]?[0-9]{1,2}){4}\.(dsl|t1)\.cavtel\.net$/	PREPEND X-GenericStaticHELO: (cavtel.net)
-/^static(-[12]?[0-9]{1,2}){4}\.frame\.cavtel\.net$/	PREPEND X-GenericStaticHELO: (cavtel.net)
-/^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.static\.[a-z]{3,10}\.[a-z]{2}\.charter\.com$/	PREPEND X-GenericStaticHELO: (charter.com)
-/^([12]?[0-9]{1,2}\.){4}\.broad\.static\.[a-z]{2}\.[a-z]{2}\.cndata\.com$/	PREPEND X-GenericStaticHELO: (cndata.com)
-/\.hfc\.comcastbusiness\.net$/ PREPEND X-GenericStaticHELO: (comcastbusiness.net)
-/^static(-[12]?[0-9]{1,2}){4}\.ipcom\.comunitel\.net$/	PREPEND X-GenericStaticHELO: (comunitel.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){4}\.xf-static\.ctbcnetsuper\.com\.br$/	PREPEND X-GenericStaticHELO: (ctbcnetsuper.com.br)
-/^[0-9]{3}(-[0-9]{3}){3}\.static\.ctbctelecom\.com\.br$/	PREPEND X-GenericStaticHELO: (ctbctelecom.com.br)
-/^cust\.static\.[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.cybernet\.ch$/	PREPEND X-GenericStaticHELO: (cybernet.ch)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.cypresscom\.net$/	PREPEND X-GenericStaticHELO: (cypresscom.net)
-/^static(-[12]?[0-9]{1,2}){4}\.ssp\.dialog\.net\.pl$/	PREPEND X-GenericStaticHELO: (dialog.net.pl)
-/^static(-[12]?[0-9]{1,2}){4}\.dunaweb\.hu$/	PREPEND X-GenericStaticHELO: (dunaweb.hu)
-/^stat(-[12]?[0-9]{1,2}){2}\.e-sky\.ru$/	PREPEND X-GenericStaticHELO: (e-sky.ru)
-/^host(-[12]?[0-9]{1,2}){4}\.sta\.embarqnow\.net$/	REJECT	Generic - Please relay via ISP (embarqnow.net)
-/^static(-[12]?[0-9]{1,2}){4}\.entelnet\.bo$/	PREPEND X-GenericStaticHELO: (entelnet.bo)
-/^static-adsl([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.une\.net\.co$/	PREPEND	X-GenericStaticHELO: (une.net.co)
-/^static-adsl([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.epm\.net\.co$/	PREPEND X-GenericStaticHELO: (epm.net.co)
-/^static-epm[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.epm\.net\.co$/	PREPEND X-GenericStaticHELO: (epm.net.co)
-/^static-static-adsl[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.epm\.net\.co$/	PREPEND X-GenericStaticHELO: (epm.net.co)
-/^([12]?[0-9]{1,2}\.){4}sta\.estpak\.ee$/	PREPEND X-GenericStaticHELO: (estpak.ee)
-/^corporat[0-2]?[0-9]{1,2}-[0-9]{4,9}\.sta\.etb\.net\.co$/	PREPEND X-GenericStaticHELO: (etb.net.co)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.everestkc\.net$/	PREPEND X-GenericStaticHELO: (everestkc.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.exatt\.net$/	PREPEND X-GenericStaticHELO: (exatt.net)
-/^static(-[12]?[0-9]{1,2}){4}\.devs\.futuro\.pl$/	PREPEND X-GenericStaticHELO: (futuro.pl)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.adsl\.static\.giga\.net\.tw$/	PREPEND X-GenericStaticHELO: (giga.net.tw)
-/^([12]?[0-9]{1,2}\.){4}static\.(host\.)?gvt\.net\.br$/		PREPEND X-GenericStaticHELO: (gvt.net.br)
-/^([12]?[0-9]{1,2}\.){4}static\.hargray\.net$/	PREPEND X-GenericStaticHELO: (hargray.net)
-/^static[0-9]{12}\.dsl\.hol\.gr$/	PREPEND X-GenericStaticHELO: (hol.gr)
-/^static[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){4}\.adsl[12]?[0-9]{1,2}-[0-9]{1,2}\.iam\.net\.ma$/	PREPEND X-GenericStaticHELO: (iam.net.ma)
-/^([12]?[0-9]{1,2}\.){4}sta\.idknet\.com$/	PREPEND X-GenericStaticHELO: (idknet.com)
-/^host([12]?[0-9]{1,2}\.){4}static\.ifxnw\.cl$/	PREPEND X-GenericStaticHELO: (ifxnw.cl)
-/^([12]?[0-9]{1,2}\.){4}static\.redip\.inext\.net\.mx$/	PREPEND X-GenericStaticHELO: (inext.net.mw)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){4}\.ded\.intelignet\.com\.br$/	PREPEND X-GenericStaticHELO: (intelignet.com.br)
-/^ic-corporativo(-[12]?[0-9]{1,2}){4}\.intercable\.net\.co$/	PREPEND X-GenericStaticHELO: (intercable.net.co)
-/^static-ip(-[12]?[0-9]{1,2}){4}\.inaddr\.intergenia\.de$/	PREPEND X-GenericStaticHELO: (intergenia.de)
-/^([12]?[0-9]{1,2}\.){4}sta\.isp-thailand\.com$/	PREPEND X-GenericStaticHELO: (isp-thailand.com)
-/^static(-[12]?[0-9]{1,2}){4}\.izmaylovo\.ru$/	PREPEND X-GenericStaticHELO: (izmaylovo.ru)
-/^([12]?[0-9]{1,2}\.){4}static\.jazztel\.es$/	PREPEND X-GenericStaticHELO: (jazztel.es)
-/^static-host\.[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.kgts\.ru$/	PREPEND X-GenericStaticHELO: (kgts.ru)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.ktnet\.kg$/	PREPEND X-GenericStaticHELO: (ktnet.kg)
-/^reverse\.([12]?[0-9]{1,2}\.){4}static\.ldmi\.com$/	PREPEND X-GenericStaticHELO: (ldmi.com)
-/^([12]?[0-9]{1,2}\.){4}sta\.lgnet\.ro$/	PREPEND X-GenericStaticHELO: (lgnet.ro)
-/^host(-[12]?[0-9]{1,2}){4}\.static\.link\.com\.eg$/	PREPEND X-GenericStaticHELO: (link.com.eg)
-/^host(-[12]?[0-9]{1,2}){4}\.static\.link\.net$/	PREPEND X-GenericStaticHELO: (link.net)
-/^static-host[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.link\.net\.pk$/	PREPEND X-GenericStaticHELO: (link.net.pk)
-/^([12]?[0-9]{1,2}\.){4}static\.reverse\.ltdomains\.com$/	PREPEND X-GenericStaticHELO: (ltdomains.com)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.client\.mchsi\.com$/	PREPEND X-GenericStaticHELO: (mchsi.com)
-/^[12]?[0-9]{1,2}(-[12?[0-9]{1,2}){3}\.adsl\.sta\.mcn\.ru$/	PREPEND X-GenericStaticHELO: (mcn.ru)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.adsl\.sta\.mcn\.ru$/	PREPEND X-GenericStaticHELO: (mcn.ru)
-/^static\.([12]?[0-9]{1,2}\.){4}mdl\.net$/	PREPEND X-GenericStaticHELO: (mdl.net)
-/^static-([12]?[0-9]{1,2}\.){4}mldnet\.com$/	PREPEND X-GenericStaticHELO: (mldnet.com)
-/^host-static(-[12]?[0-9]{1,2}){4}\.moldtelecom\.md$/	PREPEND X-GenericStaticHELO: (moldtelecom.md)
-/^lgb-static-([12]?[0-9]{1,2}\.){4}mpowercom\.net$/	PREPEND X-GenericStaticHELO: (mpowercom.net)
-/^[a-z]{3}-static-([12]?[0-9]{1,2}\.){4}mpowercom\.net$/	PREPEND X-GenericStaticHELO: (mpowercom.net)
-/^static-[a-z]{2,4}-([12]?[0-9]{1,2}\.){4}mtnl\.net\.in$/	PREPEND X-GenericStaticHELO: (mtnl.net.in)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.mts-nn\.ru$/	PREPEND X-GenericStaticHELO: (mts-nn.ru)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.networktel\.net$/	PREPEND X-GenericStaticHELO: (networktel.net)
-/^([12]?[0-9]{1,2}\.){4}static\.nextweb\.net$/	PREPEND X-GenericStaticHELO: (nextweb.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.staticnet\.ngi\.it$/	PREPEND X-GenericStaticHELO: (ngi.it)
-/^static-host(-[12]?[0-9]{1,2}){4}\.onelinkpr\.net$/	PREPEND X-GenericStaticHELO: (onelinkpr.net)
-/^([12]?[0-9]{1,2}\.){4}static\.user\.ono\.com$/	PREPEND X-GenericStaticHELO: (ono.com)
-/^ool-[0-9a-f]{8}\.static\.optonline\.net$/	PREPEND X-GenericStaticHELO: (optonline.net)
-/^static-host(-[12]?[0-9]{1,2}){4}\.patmedia\.net$/	PREPEND X-GenericStaticHELO: (patmedia.net)
-/^([12]?[0-9]{1,2}\.){4}static\.pldt\.net$/	PREPEND X-GenericStaticHELO: (pldt.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.([a-z]{3}\.)?prima\.net\.ar$/	PREPEND X-GenericStaticHELO: (prima.net.ar)
-/^ip(-[12]?[0-9]{1,2}){4}\.static\.privatedns\.com$/	PREPEND X-GenericStaticHELO: (privatedns.com)
-/^([12]?[0-9]{1,2}\.){4}sta\.prodatanet\.com\.ph$/	PREPEND X-GenericStaticHELO: (prodatanet.com.ph)
-/^static-ip(-[12]?[0-9]{1,2}){4}\.promax\.media\.pl$/	PREPEND X-GenericStaticHELO: (promax.media.pl)
-/^port(-[12]?[0-9]{1,2}){4}\.static\.qsc\.de$/	PREPEND X-GenericStaticHELO: (qsc.de)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.dia\.static\.qwest\.net$/	PREPEND X-GenericStaticHELO: (qwest.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.[a-z]{3,9}\.rdsnet\.ro$/	PREPEND	X-GenericStaticHELO: (rdsnet.ro)
-/^[12]?[0-9]{1,2}\.red(-[12]?[0-9]{1,2}){3}\.staticip\.rima-tde\.net$/	PREPEND X-GenericStaticHELO: (rima-tde.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.speedy\.com\.ar$/	PREPEND	X-GenericStaticHELO: (speedy.com.ar)
-/^static-host\.[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.tatintel\.com$/	PREPEND X-GenericStaticHELO: (tatintel.com)
-/^([12]?[0-9]{1,2}\.){4}sta\.tc-net\.ro$/	PREPEND X-GenericStaticHELO: (tc-net.ro)
-/^([12]?[0-9]{1,2}\.){4}static\.techtelnet\.net$/	PREPEND X-GenericStaticHELO: (techtelnet.net)
-/^host-([12]?[0-9]{1,2}\.){3}[12]?[0-9]{1,2}-static\.tedata\.net$/	PREPEND X-GenericStaticHELO: (tedata.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.telcel\.net\.ve$/	PREPEND X-GenericStaticHELO: (telcel.net.ve)
-/^(bip|dsl|stip)-static-[12]?[0-9]{1,2}\.([12]?[0-9]{1,2}-){2}[12]?[0-9]{1,2}\.telecom\.sk$/	PREPEND X-GenericStaticHELO: (telecom.sk)
-/^static-dsl-[12]?[0-9]{1,2}\.[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){2}\.telecom\.sk$/	PREPEND X-GenericStaticHELO: (telecom.sk)
-/^host([12]?[0-9]{1,2}-){2}static\.([12]?[0-9]{1,2}-){2}b\.business\.telecomitalia\.it$/	PREPEND X-GenericStaticHELO: (telecomitalia.it)
-/^tm\.([12]?[0-9]{1,2}\.){4}dc\.cable\.static\.telemach\.net$/	PREPEND X-GenericStaticHELO: (telemach.net)
-/^static(-[12]?[0-9]{1,2}){4}\.teleos-web\.de$/	PREPEND X-GenericStaticHELO: (teleos-web.de)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static-ip\.telepacific\.net$/	PREPEND X-GenericStaticHELO: (telepacific.net)
-/^host(-[12]?[0-9]{1,2}){4}\.static\.telewest\.net$/	PREPEND X-GenericStaticHELO: (telewest.net)
-/^([12]?[0-9]{1,2}\.){4}static\.telmex\.net\.ar$/	PREPEND X-GenericStaticHELO: (telmex.net.ar)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.tfn\.net\.tw$/	PREPEND X-GenericStaticHELO: (tfn.net.tw)
-/^([0-9a-f]{1,2}\.){2}[0-9a-f]{4}\.static\.theplanet\.com$/	PREPEND X-GenericStaticHELO: (theplanet.com)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){2}\.adsl-static\.tie\.cl$/	PREPEND X-GenericStaticHELO: (tie.cl)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.tie\.cl$/	PREPEND X-GenericStaticHELO: (tie.cl)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.tpgi\.com\.au$/	PREPEND X-GenericStaticHELO: (tpgi.com.au)
-/^dsl\.static[0-9]{4,12}\.ttnet\.net\.tr$/	PREPEND X-GenericStaticHELO: (ttnet.net.tr)
-/^dsl\.static\.([12]?[0-9]{1,2}-){2}[0-9]{3,6}\.ttnet\.net\.tr$/	PREPEND X-GenericStaticHELO: (ttnet.net.tr)
-/^static\.dsl([12]?[0-9]{1,2}-){2}[0-9]{3,7}\.ttnet\.net\.tr$/	PREPEND X-GenericStaticHELO: (ttnet.net.tr)
-/^mx-ll-([12]?[0-9]{1,2}\.){2}[12]?[0-9]{1,2}-[12]?[0-9]{1,2}\.static\.tttmaxnet\.com$/	PREPEND X-GenericStaticHELO: (tttmaxnet.com)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.twtelecom\.net$/	PREPEND X-GenericStaticHELO: (twtelecom.net)
-/^static\.customer(-[12]?[0-9]{1,2}){4}\.uninet-ide\.com\.mx$/	PREPEND X-GenericStaticHELO: (uninet-ide.com.mx)
-/^customer(-[12]?[0-9]{1,2}){4}-sta\.uninet-ide\.com\.mx$/	PREPEND	X-GenericStaticHELO: (uninet-ide.com.mx)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){1,3}\.static\.vega-ua\.net$/	PREPEND X-GenericStaticHELO: (vega-ua.net)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.adsl\.sta\.[a-z]{2,12}\.velton\.ua$/	PREPEND X-GenericStaticHELO: (velton.ua)
-/^static(-[12]?[0-9]{1,2}){4}\.[a-z]{2,12}[0-9]{0,3}\.(dsl-w|east|fios)\.verizon\.net$/	PREPEND X-GenericStaticHELO: (verizon.net)
-/^static(-[12]?[0-9]{1,2}){4}\.bdsl\.verizon\.net$/	PREPEND X-GenericStaticHELO: (verizon.net)
-/^ip[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.adsl2?\.static\.versatel\.nl$/	PREPEND X-GenericStaticHELO: (versatel.nl)
-/^[0-9a-f]{8}\.static\.spo\.virtua\.com\.br$/	PREPEND X-GenericStaticHELO: (virtual.com.br)
-/^fa([12]?[0-9]{1,2}\.){2}fix-addr\.vsi\.ru$/	PREPEND X-GenericStaticHELO: (vsi.ru)
-/^([12]?[0-9]{1,2}\.){4}([a-z]{3,15}-)?static\.vsnl\.net\.in$/	PREPEND X-GenericStaticHELO: (vsnl.net.in)
-/^([12]?[0-9]{1,2}\.){4}static(-[a-z]{3,15})?\.vsnl\.net\.in$/	PREPEND X-GenericStaticHELO: (vsnl.net.in)
-/^([12]?[0-9]{1,2}\.){4}(bb-)?static\.vsnl\.net\.in$/	PREPEND X-GenericStaticHELO: (vsnl.net.in)
-/^([12]?[0-9]{1,2}\.){4}static\.[a-z]{4,18}\.vsnl\.net\.in$/	PREPEND X-GenericStaticHELO: (vsnl.net.in)
-/^h([12]?[0-9]{1,2}\.){4}static\.ip\.windstream\.net$/	PREPEND X-GenericStaticHELO: (windstream.net)
-/^static\.[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.clients\.your-server\.de$/	PREPEND X-GenericStaticHELO: (your-server.de)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.youtele\.com$/	PREPEND X-GenericStaticHELO: (youtele.com)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.zebra\.lt$/	PREPEND X-GenericStaticHELO: (zebra.lt)
-/^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.static\.isp\.telekom\.rs$/	PREPEND	X-GenericStaticHELO: (telekom.rs)
-endif
+
 /^[a-z][12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.broadband\.bashtel\.ru$/	REJECT	Generic - Please relay via ISP (bashtel.ru)
 /^(bca|pcs)?[0-9]{12}\.res-com\.wayinternet\.com\.br$/	REJECT	Generic - Please relay via ISP (wayinternet.com)
 /^([12]?[0-9]{1,2}-){4}wlan\.lpnet\.com\.br$/	REJECT	Generic - Please relay via ISP (lpnet.com.br)
@@ -495,6 +363,7 @@ endif
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.spectrumnet\.bg$/	REJECT	Generic - Please relay via ISP (spectrumnet.bg)
 /^[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.stream\.uz$/	REJECT	Generic - Please relay via ISP (stream.uz)
 /^ip(-[12]?[0-9]{1,2}){4}\.unitymediagroup\.de$/	REJECT	Generic - Please relay via ISP (unitymediagroup.de)
+
 #+++++ generic.regexp +++++
 /\.actdsltmp$/			REJECT	Generic - Please relay via ISP
 /\.adsl$/			REJECT	Generic - Please relay via ISP
@@ -506,7 +375,6 @@ endif
 /\.hananet$/			REJECT	Generic - Please relay via ISP (hananet)
 /\.home$/			REJECT	Generic - Please relay via ISP
 /\.invalid$/			REJECT	Generic - Please relay via ISP
-/\.in-addr\.arpa$/		REJECT	Generic - Please relay via ISP
 /\.kornet$/			REJECT	Generic - Please relay via ISP (kornet)
 /\.lan$/			REJECT	Generic - Please relay via ISP
 /\.localdomain$/		REJECT	Generic - Please relay via ISP
@@ -708,7 +576,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^(\d{1,3}-){3}\d{1,3}\.static\.chello\.pl$/		REJECT  Generic - Please relay via ISP (chello.pl)
 /^(\d{1,3}-){3}\d{1,3}\.static\.chello\.sk$/            REJECT  Generic - Please relay via ISP (chello.sk)
 /^chello[0-9]{12}\.chello\.sk$/				REJECT	Generic - Please relay via ISP (chello.sk)
-/^chello[0-9]{12}\.([0-9]{1,2}\.){2}vie\.surfer\.at$/	REJECT	Generic - Please relay via ISP (chello/surfer.at)
+/^chello[0-9]{12}\.([0-9]{1,2}\.){2}vie\.surfer\.at$/	REJECT	Generic - Please relay via ISP (surfer.at)
 /^host(-[12]?[0-9]{1,2}){4}\.chirpan\.tv$/	REJECT	Generic - Please relay via ISP (chirpan.tv)
 /^host(-[12]?[0-9]{1,2}){4}\.[a-z]{3}\.choiceone\.net$/	REJECT	Generic - Please relay via ISP (choiceone.net)
 /^host(-[12]?[0-9]{1,2}){4}\.cwon\.choiceone\.net$/	REJECT	Generic - Please relay via ISP (choiceone.net)
@@ -770,7 +638,7 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^adsl(-[12]?[0-9]{1,2}){4}\.cotel\.com\.ar$/	REJECT	Generic - Please relay via ISP (cotel.com.ar)
 /^h(-[12]?[0-9]{1,2}){4}\.[a-z]{3,10}[0-9]{0,3}\.covad\.net$/	REJECT	Generic - Please relay via ISP (covad.net)
 /^h(-[12]?[0-9]{1,2}){4}\.[a-z]{4,10}[0-9]{0,2}\.covad\.net$/	REJECT	Generic - Please relay via ISP (covad.net)
-/^wsip(-[12]?[0-9]{1,2}){4}\.([a-z]{2}\.){2}cox\.net$/	REJECT	Generic - Please relay via ISP (cox.net)
+
 /^ip-([12]?[0-9]{1,2}\.){4}crowley\.pl$/	REJECT	Generic - Please relay via ISP (crowley.pl)
 /^dsl(-[12]?[0-9]{1,2}){4}\.cruzio\.com$/	REJECT	Generic - Please relay via ISP (cruzio.com)
 /^ip-([12]?[0-9]{1,2}\.){4}csa-net\.pl$/	REJECT	Generic - Please relay via ISP (csa-net.pl)
@@ -1333,8 +1201,8 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([a-z]{2,4}-){2}[1-9][0-9](-[12]?[0-9]{1,2}){4}(-[0-9]{1,4})?\.adsl\.proxad\.net$/	REJECT	Generic - Please relay via ISP (proxad.net)
 /^(adsl-)?[12]?[0-9]{1,2}(-[12]?[0-9]{1,2}){3}\.prtc\.net$/	REJECT	Generic - Please relay via ISP (prtc.net)
 /^host(-[12]?[0-9]{1,2}){4}\.prtelecom\.hu$/	REJECT	Generic - Please relay via ISP (prtelecom.hu)
-/^sju(-[12]?[0-9]{1,2}){4}\.prw\.net$/	REJECT	Generic - Please relay via ISP (prw,net)
-/^([12]?[0-9]{1,2}\.){4}psinetpa\.net$/	REJECT	Generic - Please relay via ISP (psinetpa)
+/^sju(-[12]?[0-9]{1,2}){4}\.prw\.net$/	REJECT	Generic - Please relay via ISP (prw.net)
+/^([12]?[0-9]{1,2}\.){4}psinetpa\.net$/	REJECT	Generic - Please relay via ISP (psinetpa.net)
 /^([12]?[0-9]{1,2}\.){4}unregistered\.ptc\.pl$/	REJECT	Generic - Please relay via ISP (ptc.pl)
 /^([12]?[0-9]{1,2}\.){4}res-cmts\.[a-z]{2,4}[0-9]\.ptd\.net$/	REJECT	Generic - Please relay via ISP (ptd.net)
 /^([12]?[0-9]{1,2}\.){4}res-cmts\.[a-z]{1,4}[0-9]{0,3}\.ptd\.net$/	REJECT	Generic - Please relay via ISP (ptd.net)
@@ -1386,7 +1254,6 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.[a-z]{3,16}\.res\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^([12]?[0-9]{1,2}\.){4}[a-z]{3,16}\.res\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^cpe(-[12]?[0-9]{1,2}){4}\.[a-z]{2,6}\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
-/^rrcs(-[12]?[0-9]{1,2}){4}\.[a-z]{2,10}\.biz\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^([12]?[0-9]{1,2}-[12]?[0-9]{1,2}\.){2}tampabay\.res\.rr\.com$/	REJECT	Generic - Please relay via ISP (rr.com)
 /^ip(-[12]?[0-9]{1,2}){4}\.user\.rsspnet\.ru$/	REJECT	Generic - Please relay via ISP (rsspnet.ru)
 /^([12]?[0-9]{1,2}\.){4}rtc\.coop$/	REJECT	Generic - Please relay via ISP (rtc.coop)
@@ -1600,7 +1467,6 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.del\.tulipconnect\.com$/	REJECT	Generic - Please relay via ISP (tulipconnect.com)
 /^user(-[12]?[0-9]{1,2}){4}\.tvcablenet\.be$/	REJECT	Generic - Please relay via ISP (tvcablenet.be)
 /^cpe[0-9]{2,6}\.tvcom\.net\.ua$/	REJECT	Generic - Please relay via ISP (tvcom.net.ua)
-
 /^host([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.tvkdiana\.pl$/	REJECT	Generic - Please relay via ISP (tvkdiana.pl)
 /^dsl([12]?[0-9]{1,2}-){3}[12]?[0-9]{1,2}\.pool\.tvnet\.hu$/	REJECT	Generic - Please relay via ISP (tvnet.hu)
 /^IP(-[12]?[0-9]{1,2}){2}\.tvnetwork\.hu$/	REJECT	Generic - Please relay via ISP (tvnetwork.hu)
@@ -1661,7 +1527,8 @@ if /cable|dsl|[0-9a-f]{4}|[0-9][^0-9]+[0-9]/
 /^([12]?[0-9]{1,2}-){4}[ux]?dsl\.vntc\.ru$/	REJECT	Generic - Please relay via ISP (vntc.ru)
 /^vc(-[12]?[0-9]{1,2}){4}\.3g\.vodacom\.co\.za$/	REJECT	Generic - Please relay via ISP (vodacom.co.za)
 /^vc-nat-gp-s(-[0-9]{1,3}){4}\.umts\.vodacom\.co\.za$/	REJECT  Generic - Please relay via ISP (vodacom.co.za)
-/^([12]?[0-9]{1,2}\.){4}rev\.vodafone\.pt$/	REJECT	Generic - Please relay via ISP (vodaphone.pt)
+/^([12]?[0-9]{1,2}\.){4}rev\.vodafone\.pt$/	REJECT	Generic - Please relay via ISP (vodafone.pt)
+/^net(-[12]?[0-9]{1,2}){4}.cust.vodafonedsl.it$/ REJECT Generic - Please relay via ISP (vodaphonedsl.it)
 /^ip\.([12]?[0-9]{1,2}\.){4}stat\.volia\.net$/	REJECT	Generic - Please relay via ISP (volia.net)
 /^shpd(-[12]?[0-9]{1,2}){4}\.vologda\.ru$/	REJECT	Generic - Please relay via ISP (vologda.ru)
 /^bbv(-[12]?[0-9]{1,2}){4}\.vologda\.ru$/	REJECT	Generic - Please relay via ISP (vologda.ru)
