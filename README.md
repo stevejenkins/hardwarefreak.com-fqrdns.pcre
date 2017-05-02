@@ -9,11 +9,13 @@ If you have suggested modifications to this file, please create a new issue or a
 
 There are now **three** separate PCRE files in the `fqrdns.pcre` project. They are:
 
-* **fqrdns.pcre** - the primary list of bot spam killer rules. Extremely low chance of false positives.
-* **fqrdns-plus.pcre** - slightly more restrictive rules that have been moved from the original fqrdns.pcre file due to a slightly increased likelihood of false positives. Overall, however, this file still has a low chance of false positives.
-* **fqrdns-max.pcre** - new rules that were never part of the original fqrdns.pcre file and which use more general patterns to take more a aggressive approach to blocking bot spam, including a maximum number of dynamic hosts and/or misconfigured senders. These patterns help enforce a more strict and "forensically sound" route of static addresses from sender to recipient, but with an increased risk of blocking potentially legitimate mail from misconfigured senders.
+* **fqrdns.pcre** - the primary list of bot spam killer rules. The goal of this list is to have virtually zero chance of false positives.
 
-Mail admins should start with the primary `fqrdns.pcre` first, then add the `fqrdns-plus.pcre` and `fqrdns-max.pcre` files (in addition to, not as a replacement for) to their setup as desired.
+* **fqrdns-plus.pcre** - *slightly* more restrictive rules that have been moved from the original fqrdns.pcre file due to a slightly increased risk of false positives. Overall, however, this file still has a low chance of false positives. This file should be used *in addition to* the original `fqrdns.pcre` file.
+
+* **fqrdns-max.pcre** - new rules that were never part of the original fqrdns.pcre file and which use more general patterns to take more a aggressive approach to blocking bot spam, including a maximum number of dynamic hosts and/or misconfigured senders. These patterns help enforce a more strict and "forensically sound" route of static addresses from sender to recipient, but with an increased risk of blocking potentially legitimate mail from misconfigured senders. This file should be used *in addition to* the original `fqrdns.pcre` file and the `fqrdns-plus-pcre` file.
+
+Mail admins should deploy the primary `fqrdns.pcre` first, then **add** the `fqrdns-plus.pcre` and `fqrdns-max.pcre` files to their setup as desired. The three separate files work together to create a **tiered** approach to progressively blocking spam and misconfigured mailers.
 
 The following paragraphs were included in Stan's original `README`:
 
@@ -28,7 +30,7 @@ and modify it as you see fit, for your purposes, with absolutely no strings atta
 # Usage
 Save any of the pcre files included in this project in `/etc/postfix/`.
 
-Add them to the `smtpd_client_restrictions` section of `main.cf`. When using multiple files from this project, it is recommended to include them in your `main.cf` file in order of most aggressive to least aggressive:
+Add them to the `smtpd_client_restrictions` section of `main.cf`. When using multiple files from this project, it is recommended to include them in your `main.cf` file in order of *most* aggressive to *least* aggressive:
 
     smtpd_client_restrictions =
     	...
