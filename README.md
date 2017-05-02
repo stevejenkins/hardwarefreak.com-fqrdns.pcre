@@ -13,7 +13,7 @@ There are now **three** separate PCRE files in the `fqrdns.pcre` project. They a
 
 * **fqrdns-plus.pcre** - *slightly* more restrictive rules that have been moved from the original fqrdns.pcre file due to a slightly increased risk of false positives. Overall, however, this file still has a low chance of false positives. This file should be used *in addition to* the original `fqrdns.pcre` file.
 
-* **fqrdns-max.pcre** - new rules that were never part of the original fqrdns.pcre file and which use more general patterns to take more a aggressive approach to blocking bot spam, including a maximum number of dynamic hosts and/or misconfigured senders. These patterns help enforce a more strict and "forensically sound" route of static addresses from sender to recipient, but with an increased risk of blocking potentially legitimate mail from misconfigured senders. This file should be used *in addition to* the original `fqrdns.pcre` file and the `fqrdns-plus-pcre` file.
+* **fqrdns-max.pcre** - new rules that were never part of the original fqrdns.pcre file and which use more general patterns to take more a aggressive approach to blocking bot spam, including a maximum number of dynamic hosts and/or misconfigured senders. These patterns help enforce a more strict and "forensically sound" route of static addresses from sender to recipient, but with an increased risk of blocking potentially legitimate mail from misconfigured senders. This file should be used *in addition to* the original `fqrdns.pcre` file and the `fqrdns-plus.pcre` file.
 
 Mail admins should deploy the primary `fqrdns.pcre` first, then **add** the `fqrdns-plus.pcre` and `fqrdns-max.pcre` files to their setup as desired. The three separate files work together to create a **tiered** approach to progressively blocking spam and misconfigured mailers.
 
@@ -56,7 +56,7 @@ toward the very top of your restrictions list, with your IP whitelist first, suc
     	...
 
 # Additional Patterns
-If you would like to propose a pattern which isn't currently covered, please create a new issue or pull request here on GitHub so it it can be considered for inclusion.
+If you would like to propose a pattern which isn't currently covered, please create a new issue or pull request here on GitHub so it it can be considered for inclusion in the appropriate list.
 
 # Downloading Updates
-The file doesn't change very often so a wget every two weeks is usually sufficient. Each file change is normally one or more new expressions or minor fixes.
+The file doesn't change very often so a wget every few weeks is usually sufficient. Each file change is normally one or more new expressions or minor fixes.
