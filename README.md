@@ -1,5 +1,5 @@
 # Postfix PCRE Bot Spam Killer
-*(no longer available at www.hardwarefreak.com/fqrdns.pcre)*
+*(no longer available at [www.hardwarefreak.com/fqrdns.pcre](https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre)*
 
 **v2015-11-18**
 
