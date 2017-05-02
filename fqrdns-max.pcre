@@ -1,0 +1,26 @@
+# Postfix PCRE MAX
+# 
+# Updated 18 Nov 2015
+#
+# This "max" file is an addendum to the fqrdns.pcre and fqrdns-plus.pcre files found at
+# https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre
+# 
+# The intent of this "max" file is to provide new rules that were never part of the original
+# fqrdns.pcre file and which use more general patterns to take more a aggressive approach to
+# blocking bot spam, including a maximum number of dynamic hosts and/or misconfigured senders.
+# These patterns help enforce a more strict and "forensically sound" route of static addresses
+# from sender to recipient, at an increased risk of blocking potentially legitimate mail. It should
+# be used in addition to (and not in lieu of) the original fqrdns.pcre and fqrdns-plus.pcre files.
+# 
+# This file is provided AS IS with no WARRANTY. It is free software, without attribute
+# or copyright, and without license. As such, you are completely free to use it 
+# and modify it as you see fit, for your purposes, with absolutely no strings attached.
+# 
+# See https://github.com/stevejenkins/hardwarefreak.com-fqrdns.pcre for usage.
+
+#+++++ dynamic.regexp +++++
+/([0-9]{1,3}[.-]){2,4}.[.-]d[iy]namic[ao]/ REJECT Dynamic - Please relay via your ISP
+/d[iy]n(amic|amicIP|adsl|dsl|ip|pool)?[.-_]?.[0-9]{0,3}[.-]/ REJECT Dynamic - Please relay via your ISP
+/dial(in|up|-up|ip|pool|bs)?[0-9]?[.-]/ REJECT Dynamic - Please relay via your ISP
+/dhcp[0-9]?[.-]/ REJECT Dynamic - Please relay via your ISP
+/(wireless|wifi|wimax|.mobileonline)[.-]/ REJECT Dynamic - Please relay via your ISP
