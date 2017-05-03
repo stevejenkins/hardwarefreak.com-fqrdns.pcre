@@ -28,7 +28,7 @@ or copyright, and without license.  As such, you are completely free to use it
 and modify it as you see fit, for your purposes, with absolutely no strings attached.*
 
 # Usage
-Save any of the pcre files included in this project in `/etc/postfix/`.
+Save any of the `.pcre` files included in this project in `/etc/postfix/`.
 
 Add them to the `smtpd_client_restrictions` section of `main.cf`. When using multiple files from this project, it is recommended to include them in your `main.cf` file in order of *most* aggressive to *least* aggressive:
 
@@ -36,8 +36,7 @@ Add them to the `smtpd_client_restrictions` section of `main.cf`. When using mul
     	...
     	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-max.pcre
         check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-plus.pcre
-    	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-
+        check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
     	...
 
 If using Postfix 2.5 or earlier, use `check_client_access` instead of `check_reverse_client_hostname_access`.
