@@ -28,32 +28,36 @@ or copyright, and without license.  As such, you are completely free to use it
 and modify it as you see fit, for your purposes, with absolutely no strings attached.*
 
 # Usage
-Save any of the pcre files included in this project in `/etc/postfix/`.
+Save any of the `.pcre` files included in this project in `/etc/postfix/`.
 
 Add them to the `smtpd_client_restrictions` section of `main.cf`. When using multiple files from this project, it is recommended to include them in your `main.cf` file in order of *most* aggressive to *least* aggressive:
 
     smtpd_client_restrictions =
-    	...
-    	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-max.pcre
+        ...
+        check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-max.pcre
         check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns-plus.pcre
-    	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
+        check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
+        ...
 
-    	...
+If using **Postfix 2.5 or earlier**, use `check_client_access` instead of `check_reverse_client_hostname_access`.
 
-If using Postfix 2.5 or earlier, use `check_client_access` instead of `check_reverse_client_hostname_access`.
-
-    	check_client_access pcre:/etc/postfix/fqrdns.pcre
+    smtpd_client_restrictions =
+        ...
+        check_client_access pcre:/etc/postfix/fqrdns-max.pcre
+        check_client_access pcre:/etc/postfix/fqrdns-plus.pcre
+        check_client_access pcre:/etc/postfix/fqrdns.pcre
+        ...
 
 If you use the "everything under smtp_recipient_restrictions" approach in your `main.cf`, add `fqrdns.pcre`
 toward the very top of your restrictions list, with your IP whitelist first, such as:
 
     smtpd_recipient_restrictions =
-    	permit_mynetworks
-    	permit_sasl_authenticated
-    	reject_unauth_destination
-    	check_client_access hash:/etc/postfix/whitelist
-    	check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
-    	...
+        permit_mynetworks
+        permit_sasl_authenticated
+        reject_unauth_destination
+        check_client_access hash:/etc/postfix/whitelist
+        check_reverse_client_hostname_access pcre:/etc/postfix/fqrdns.pcre
+        ...
 
 # Additional Patterns
 If you would like to propose a pattern which isn't currently covered, please create a new issue or pull request here on GitHub so it it can be considered for inclusion in the appropriate list.
