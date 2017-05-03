@@ -41,7 +41,7 @@ Add them to the `smtpd_client_restrictions` section of `main.cf`. When using mul
 
 If using Postfix 2.5 or earlier, use `check_client_access` instead of `check_reverse_client_hostname_access`.
 
-    	check_client_access pcre:/etc/postfix/fqrdns.pcre
+    check_client_access pcre:/etc/postfix/fqrdns.pcre
 
 If you use the "everything under smtp_recipient_restrictions" approach in your `main.cf`, add `fqrdns.pcre`
 toward the very top of your restrictions list, with your IP whitelist first, such as:
