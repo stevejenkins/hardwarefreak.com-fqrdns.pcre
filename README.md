@@ -3,7 +3,7 @@
 
 **v2015-11-18**
 
-The original version of the `fqrdns.pcre` file was created by someone on the now defunct SPAM-L mailing list. It was later maintained and made available to the masses and maintained by **[Stan Hoeppner](http://hardwarefreak.org/)**. Stan has graciously allowed me to maintain the project since 2015.
+The original version of the `fqrdns.pcre` file was created by someone on the now defunct SPAM-L mailing list. It was later maintained and made available to the masses by **[Stan Hoeppner](http://hardwarefreak.org/)**. Stan has graciously allowed me to maintain the project since 2015.
 
 If you have suggested modifications to this file, please create a new issue or a pull request here on GitHub so I can consider the proposed changes after others have had a chance to comment. You can use the History function here on GitHub to see the most recent changes.
 
